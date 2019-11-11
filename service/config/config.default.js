@@ -2,9 +2,10 @@
 
 'use strict';
 
-/**
- * @param {Egg.EggAppInfo} appInfo app info
- */
+
+
+
+
 module.exports = appInfo => {
   /**
    * built-in config
@@ -12,6 +13,35 @@ module.exports = appInfo => {
    **/
   const config = exports = {};
 
+  config.mysql = {
+    // database configuration
+    client: {
+      // host
+      host: 'localhost',
+      // port
+      port: '32781',
+      // username
+      user: 'root',
+      // password
+      password: '12345678',
+      // database
+      database: 'blog',
+    },
+    // load into app, default is open
+    app: true,
+    // load into agent, default is close
+    agent: false,
+  };
+  config.security = {
+    csrf: {
+      enable: false
+    },
+    domainWhiteList: ['*']
+  };
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
+  };
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1573197534699_9798';
 
@@ -27,23 +57,4 @@ module.exports = appInfo => {
     ...config,
     ...userConfig,
   };
-};
-exports.mysql = {
-  // database configuration
-  client: {
-    // host
-    host: 'localhost',
-    // port
-    port: '32781',
-    // username
-    user: 'root',
-    // password
-    password: '123456',
-    // database
-    database: 'blog',
-  },
-  // load into app, default is open
-  app: true,
-  // load into agent, default is close
-  agent: false,
 };
